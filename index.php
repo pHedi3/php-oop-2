@@ -4,21 +4,21 @@ class EShop {
 
     private $name;
 
-    private $addres;
+    private $address;
 
-    private $prodocts = [];
+    private $products  = [];
 
     private $user = [];
 
     private $userPremium = [];
 
-    public function __construct(string $name, string $adres) {
+    public function __construct(string $name, string $address) {
         $this->name = $name;
-        $this->addres = $adres;
+        $this->address = $address;
     }
 
-    public function addProdoct(Product $prodoct) {
-        $this->prodocts[] = $prodoct;
+    public function addProduct(Product $product) {
+        $this->products[] = $product;
     }
 
     public function addUser(User $var) {
@@ -28,10 +28,10 @@ class EShop {
         $this->userPremium[] = $var;
     }
 
-    public function removeProdoct(Product $var) {
-        $id = array_search($var, $this->prodocts);
-        unset($this->prodocts[$id]);
-        $this->prodocts = array_values($this->prodocts);
+    public function removeProduct(Product $var) {
+        $id = array_search($var, $this->products);
+        unset($this->products[$id]);
+        $this->products = array_values($this->products);
     }
 
     
@@ -76,22 +76,22 @@ Class BeautyProduct extends Product {
 class User {
 
     private $nameUser;
-    private $addres;
-    private $prodoctS = [];
+    private $address;
+    private $productS = [];
     private $Card;
     private $sconto = 0;
 
-    public function __construct(string $name, string $adres) {
+    public function __construct(string $name, string $address) {
         $this->nameUser = $name;
-        $this->addres = $adres;
+        $this->address = $address;
     }
 
     public function addCard(string $name, string $number, string $date) {
         $this->card = new Card($name, $number, $date);
     }
 
-    public function addProdoct(Product $var) {
-        $this->prodoctS[] = $var;
+    public function addProduct(Product $var) {
+        $this->productS[] = $var;
     }
 
     public function getSconto() {
@@ -109,20 +109,20 @@ class PremiumUser {
 
     private $nameUser;
     private $addres;
-    private $prodoctS = [];
+    private $productS = [];
     private $card;
     private $sconto = 50;
-    public function __construct(string $name, string $adres) {
+    public function __construct(string $name, string $address) {
         $this->nameUser = $name;
-        $this->addres = $adres;
+        $this->address = $address;
     }
 
     public function addCard(string $name, string $number, string $date) {
         $this->card = new Card($name, $number, $date);
     }
 
-    public function addProdoct(Product $var) {
-        $this->prodoctS[] = $var;
+    public function addProduct(Product $var) {
+        $this->productS[] = $var;
     }
 
     public function getSconto() {
@@ -157,11 +157,11 @@ $cream = new BeautyProduct('hand cream', 'levinel', 20);
 $shampo = new BeautyProduct('shampo capelli grassi', 'paludon', 3);
 $book = new Product('the dust', 'the triology of dust', 12);
 
-$hooli->addProdoct($smartPhone);
-$hooli->addProdoct($toyCar);
-$hooli->addProdoct($cream);
-$hooli->addProdoct($shampo);
-$hooli->addProdoct($book);
+$hooli->addProduct($smartPhone);
+$hooli->addProduct($toyCar);
+$hooli->addProduct($cream);
+$hooli->addProduct($shampo);
+$hooli->addProduct($book);
 
 $gino = new User('Gino', 'Via Pollo Spennato');
 $gastone = new PremiumUser('Gastone', 'Via Riccanza');
@@ -173,8 +173,8 @@ $gino->addCard('Gino', '20203030', '2020-08-9');
 $gastone->addCard('Gastone', '007', '2040-12-23');
 
 function buyProdoct($hooli, $who, $prodoct) {
-    $hooli->removeProdoct($prodoct);
-    $who->addProdoct($prodoct);
+    $hooli->removeProduct($prodoct);
+    $who->addProduct($prodoct);
     $sconto = $who->getSconto();
     if ($sconto != 0) {
         $price = $prodoct->getPrice() * ($sconto / 100);
