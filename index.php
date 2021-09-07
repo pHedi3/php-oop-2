@@ -6,7 +6,7 @@ class EShop {
 
     private $addres;
 
-    private $prodoctAvailable = [];
+    private $prodocts = [];
 
     private $user = [];
 
@@ -18,7 +18,7 @@ class EShop {
     }
 
     public function addProdoct(Product $prodoct) {
-        $this->prodoctAvailable[] = $prodoct;
+        $this->prodocts[] = $prodoct;
     }
 
     public function addUser(User $var) {
@@ -29,9 +29,9 @@ class EShop {
     }
 
     public function removeProdoct(Product $var) {
-        $id = array_search($var, $this->prodoctAvailable);
-        unset($this->prodoctAvailable[$id]);
-        $this->prodoctAvailable = array_values($this->prodoctAvailable);
+        $id = array_search($var, $this->prodocts);
+        unset($this->prodocts[$id]);
+        $this->prodocts = array_values($this->prodocts);
     }
 
     
@@ -157,7 +157,7 @@ $gastone->addCard('Gastone', '007', '2040-12-23');
 function buyProdoct($hooli, $who, $prodoct) {
     $hooli->removeProdoct($prodoct);
     $who->addProdoct($prodoct);
-    echo 'devi pagare ' . $prodoct->getPrice();
+    echo 'devi pagare ' .  $prodoct->getPrice();
 }
 buyProdoct($hooli, $gino, $cream);
 
