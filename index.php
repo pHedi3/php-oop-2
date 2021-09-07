@@ -52,7 +52,7 @@ class Product {
         $this->price = $price;
     }
     public function getPrice() {
-        echo $this->price;
+        return $this->price;
     }
 
 }
@@ -79,7 +79,7 @@ class User {
     private $addres;
     private $prodoctS = [];
     private $Card;
-    protected $sconto = 0;
+    private $sconto = 0;
 
     public function __construct(string $name, string $adres) {
         $this->nameUser = $name;
@@ -94,6 +94,14 @@ class User {
         $this->prodoctS[] = $var;
     }
 
+    public function getSconto() {
+        return $this->sconto;
+    }
+
+    public function getName() {
+        return $this->nameUser;
+    }
+
 
 }
 
@@ -103,7 +111,7 @@ class PremiumUser {
     private $addres;
     private $prodoctS = [];
     private $card;
-    protected $sconto = 50;
+    private $sconto = 50;
     public function __construct(string $name, string $adres) {
         $this->nameUser = $name;
         $this->addres = $adres;
@@ -113,6 +121,16 @@ class PremiumUser {
         $this->card = new Card($name, $number, $date);
     }
 
+    public function addProdoct(Product $var) {
+        $this->prodoctS[] = $var;
+    }
+
+    public function getSconto() {
+        return $this->sconto;
+    }
+    public function getName() {
+        return $this->nameUser;
+    }
 
 }
 
@@ -157,11 +175,16 @@ $gastone->addCard('Gastone', '007', '2040-12-23');
 function buyProdoct($hooli, $who, $prodoct) {
     $hooli->removeProdoct($prodoct);
     $who->addProdoct($prodoct);
-    echo 'devi pagare ' .  $prodoct->getPrice();
+    $sconto = $who->getSconto();
+    if ($sconto != 0) {
+        $price = $prodoct->getPrice() * ($sconto / 100);
+        echo $who->getName() . ' devi pagare ' . $price . ' anziche ' . $prodoct->getPrice();
+    } else {
+
+        echo $who->getName() . ' devi pagare '. $prodoct->getPrice();
+    }
+
 }
 buyProdoct($hooli, $gino, $cream);
-
-/*
-6. l'utente normale acquista un prodotto
-7. l'utente premium acquista un altro prodotto (e riceve lo sconto)
-*/
+echo '<br>';
+buyProdoct($hooli, $gastone, $smartPhone);
