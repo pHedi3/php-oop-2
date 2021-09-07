@@ -2,47 +2,103 @@
 
 class EShop {
 
-    // mettiamo una lista di prodotti
+    private $name;
 
+    private $addres;
+
+    private $prodoctAvailable;
+
+    private $prodoctNotAvailable;
+
+    private $user;
+
+    private $userPremium;
+
+    public function __construct(string $name, string $adres) {
+        $this->name = $name;
+        $this->addres = $adres;
+    }
+
+    
 }
 
 // ---------------------------------------------
 
 class Product {
 
+    private $label;
+    private $name;
+    private $price;
+    private $weight; 
+
+    public function __construct(string $label, string $name, string $price) {
+        $this->label = $label;
+        $this->name = $name;
+        $this->price = $price;
+    }
+
 }
 
 Class TechProduct extends Product {
 
+    private $needBattery;
+    private $compatibility;
+    private $os;
+    public function __construct(string $label, string $name, int $price, bool $bat ) {
+        $this->label = $label;
+        $this->name = $name;
+        $this->price = $price;
+        $this->needBattery = $but;
+    }
+
 }
 
 Class BeautyProduct extends Product {
-    
+
+    private $uses;
+    private $composition;
+    public function __construct(string $label, string $name, int $price, string $use ) {
+        $this->label = $label;
+        $this->name = $name;
+        $this->price = $price;
+        $this->uses = $use;
+    }
 }
 
 // ---------------------------------------------
 
 class User {
 
-    public $sconto = 0;
+    private $nameUser;
+    private $addres;
+    private $Card;
+    protected $sconto = 0;
 
 }
 
 class PremiumUser {
 
-    // qui dentro potrebbe avere la definizione di una percentuale di 
-    // sconto per ogni prodotto.
-    public $sconto = 50;
+    private $nameUser;
+    private $addres;
+    private $Card;
+    protected $sconto = 50;
 
 
 }
 
 // ----------------------------------------------
 
+$hooli = new EShop('Hooli', 'Via Parto in Tre');
+var_dump($hooli);
+
+$smartPhone = new TechProduct('iphone', 'iphon 12 pro', 1200, false);
+$toyCar = new TechProduct('toy Car Power', 'extrem Car', 240, true);
+$cream = new BeautyProduct('hand cream', 'levinel', 20, 'for hand and body');
+$shampo = new BeautyProduct('shampo capelli grassi', 'paludon', 3, 'for hair');
+$book = new Product('the dust', 'the triology of dust', 12)
+
 
 /*
-1. creiamo l'eshop
-2. creiamo diversi prodotti
 3. aggiungiamoli all'eshop
 4. creaiamo l'utente normale
 5. creiamo un utente premium
